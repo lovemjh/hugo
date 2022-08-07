@@ -1,0 +1,94 @@
+name: deploy
+
+on:
+    push:
+    workflow_dispatch:
+    schedule:
+        # Runs everyday at 8:00 AM
+        - cron: "0 0 * * *"
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v2
+              with:
+                  token: ${{ secrets.PRIVATE_TOKEN }}
+                  submodules: true
+                  fetch-depth: 0
+
+            - name: Setup Hugo
+              uses: peaceiris/actions-hugo@v2
+              with:
+                  hugo-version: "latest"
+                  extended: true
+
+            - name: Build Web
+              run: hugo
+
+            - name: Deploy Web
+              uses: peaceiris/actions-gh-pages@v3
+              with:
+                  PERSONAL_TOKEN: ${{ secrets.PRIVATE_TOKEN }}
+                  EXTERNAL_REPOSITORY: lovemjh/lovemjh.github.io
+                  PUBLISH_BRANCH: main
+                  PUBLISH_DIR: ./public
+                  commit_message: ${{ github.event.head_commit.message }}
+                  
+            - name: Synchronous warehouse hugo
+              env:
+                SSH_PRIVATE_KEY: ${{ secrets.GITEE_PRIVATE_KEY }}
+              run: |
+                mkdir -p ~/.ssh
+                echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+                chmod 600 ~/.ssh/id_rsa
+                echo "StrictHostKeyChecking no" >> ~/.ssh/config
+            - name: Push Mirror
+              env:
+                SOURCE_REPO: 'git@github.com:lovemjh/hugo.git'
+                DESTINATION_REPO: 'git@gitee.com:lovemjh/hugo.git'
+              run: |
+                git clone --mirror "$SOURCE_REPO" && cd `basename "$SOURCE_REPO"`
+                git remote set-url --push origin "$DESTINATION_REPO"
+                git fetch -p origin
+                git for-each-ref --format 'delete %(refname)' refs/pull | git update-ref --stdin
+                git push --mirror
+
+            - name: Synchronous warehouse obsidian
+              env:
+                SSH_PRIVATE_KEY: ${{ secrets.GITEE_PRIVATE_KEY }}
+              run: |
+                mkdir -p ~/.ssh
+                echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+                chmod 600 ~/.ssh/id_rsa
+                echo "StrictHostKeyChecking no" >> ~/.ssh/config
+            - name: Push Mirror
+              env:
+                SOURCE_REPO: 'git@github.com:lovemjh/obsidian.git'
+                DESTINATION_REPO: 'git@gitee.com:lovemjh/obsidian.git'
+              run: |
+                git clone --mirror "$SOURCE_REPO" && cd `basename "$SOURCE_REPO"`
+                git remote set-url --push origin "$DESTINATION_REPO"
+                git fetch -p origin
+                git for-each-ref --format 'delete %(refname)' refs/pull | git update-ref --stdin
+                git push --mirror
+
+            - name: Synchronous warehouse star
+              env:
+                SSH_PRIVATE_KEY: ${{ secrets.GITEE_PRIVATE_KEY }}
+              run: |
+                mkdir -p ~/.ssh
+                echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+                chmod 600 ~/.ssh/id_rsa
+                echo "StrictHostKeyChecking no" >> ~/.ssh/config
+            - name: Push Mirror
+              env:
+                SOURCE_REPO: 'git@github.com:lovemjh/star.git'
+                DESTINATION_REPO: 'git@gitee.com:lovemjh/star.git'
+              run: |
+                git clone --mirror "$SOURCE_REPO" && cd `basename "$SOURCE_REPO"`
+                git remote set-url --push origin "$DESTINATION_REPO"
+                git fetch -p origin
+                git for-each-ref --format 'delete %(refname)' refs/pull | git update-ref --stdin
+                git push --mirror
