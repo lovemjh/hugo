@@ -1,3 +1,6 @@
 [submodule "content/posts"]
 	path = content/posts
 	url = git@github.com:lovemjh/obsidian.git
+[submodule "themes/star"]
+	path = themes/star
+	url = git@github.com:lovemjh/star.git
