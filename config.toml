@@ -1,97 +1,163 @@
 baseURL = 'https://lovemjh.github.io/'
-languageCode = 'zh-cn'
-title = '青山客'
 
-theme = 'star'
-hasCJKLanguage = true
-summaryLength = 80    # default 70
-paginate = 24         # better 4 * 3 * times
+languageCode = 'zh-cn'
+
+title = '山河故人'
+
+theme = 'Meet'
+
+
+# If true, auto-detect Chinese/Japanese/Korean Languages in the content.
+# This will make .Summary and .WordCount behave correctly for CJK languages.
+# 中日韩语言请改为 true
+hasCJKLanguage = true # default false
+isCJKLanguage = true # default false
+
+# length of summary
+# 摘要的字数限制
+summaryLength = 70    # default 70
+paginate = 10         # better 4 * 3 * times
 enableGitInfo = true
 
-[params]
-    # active fadeIn animate when load page
-    hasActiveAnimate = true      
-
-    # show poems of home page
-    showPoem = true
-
-    # active cool style, be cool but take up more resources, and
-    # if you want to replace default background image, just 
-    # rename it `default.jpg` and place it into `/static/imgs/bg` dir, like `/static/imgs/bg/default.jpg`.
-    hasActiveCool = true
-
-    # For a better experience, we use localstorage to keep theme dark status, so
-    # if you set dark as `true` but has no effect, you
-    # should clear local storage of current site. And
-    # in general, there has no any questions when you use it firstly.
-    dark = false
-
-    # Fold/Unfold code blocks, default `false`, and
-    # if `true` ，all code blocks will be folded when page load.
-    # It will be always true in Mobile view no matter what's your setting.
-    hasFoldAllCodeBlocks = false
-
-    # active english view, default chinese
-    en = false
-
-    slogan = 'Life is just a joker.'        # your site slogan below title
-
-    # like the following items that you need create a relative markdown file
-    # Search - search.md
-    # Nav - nav.md 
-    # Archive - archive.md
-    # About - about.md or about/index.md
-    # Idea posts/idea.md 
-    # Wiki - posts/wiki.md
-    [params.menu]
-        search = true
-        nav = false
-        archive = true
-        idea = false
-        wiki = false
-        about = false
 
 
-    [params.svg]
-        color = '#6c757d'                   # icon color of breadcrumb '#666'  # '#5a29e4' 
-    
-    # [[!!! deprecated]] - which may make homepage seems too blank
-    # --------------------------------
-    # [params.img]
-        # Img of home page - if not jpg, rename it, and
-        # place it inio `static/imgs/` dir
-        # In-built : lightcolor, girl, and tux
-        # src = 'tux'
-        # width = 880
-        # and if not want to show img but some words, just 
-        # comment `src = 'xxx'`, and input your words:
-        # words = "Stay hungry, Stay foolish. Your time is limited, so don't waste it living someone else's life. Have the courage to follow your heart and intuition. They somehow already know what you truly want to become. Everything else is secondary. -- Steve Jobs."
-        # words = "多少事，从来急；天地转，光阴迫。一万年太久，只争朝夕。 -- 教员"
-    # --------------------------------
+[menus]
+    [[menus.main]]
+        # 名称
+        name = "主页"
+        # 路径
+        url = "/"
+        # order weight, more small more close to left, at least 1
+        # 排序的权重，越小越靠前（左），最小为1
+        weight = 1
+        # icon from FontAwesome in front of single entry
+        # 图标，本主题使用的图标来自FontAwesome
+        pre = "<i class='fa fa-home'></i>"
+    [[menus.main]]
+        name = "文章"
+        url = "/posts"
+        weight = 2
+        pre = "<i class='fa fa-archive'></i>"
+    [[menus.main]]
+        name = "归档"
+        url = "/archive"
+        weight = 4
+        pre = "<i class='fa fa-folder-open'></i>"
+    [[menus.main]]
+        name = "分类"
+        url = "/categories"
+        weight = 4
+        pre = "<i class='fa fa-folder-open'></i>"
+    [[menus.main]]
+        name = "标签"
+        url = "/tags"
+        weight = 5
+        pre = "<i class='fa fa-tags'></i>"        
+    [[menus.main]]
+        name = "关于"
+        url = "/about"
+        weight = 6
+        pre = "<i class='fa fa-info-circle'></i>"
+  
+[Params]
 
-    [params.contact]
-        icp = '豫ICP备2022002918号'          # beian number
-        icplink = '//beian.miit.gov.cn'
-        weibo = '6867589681'                # e.g. https://weibo.com/u/6867589681
-        wechat = 'imgs/bg/wechat.jpg'       # Wechat QR, choose your path
-        email = 'loveminimal@outlook.com'
-        github = 'loveminimal'              # e.g. https://github.com/loveminimal
-        bilibili = '11608450'               # e.g. https://space.bilibili.com/11608450
-        # twitter = 'loveminimal'             # e.g. https://twitter.com/loveminimal
-        # facebook = 'loveminimal'            # e.g. https://facebook.com/loveminimal
-        # youtube = 'loveminimal'             # e.g. https://youtube.com/user/loveminimal
-        color = '#696969'                   # icon color of contact #5d2f86
+    #作者信息
+    [Params.author]
+        # 作者名称
+        name = "青山"
+        description = "悟已往之不谏 知来者之可追"
+        # 作者头像
+        # 本地路径开头”/“是必需的，亦可以链接。 下同
+        # img = "/images/img.jpg"
+        img = "http://q1.qlogo.cn/g?b=qq&nk=2409741052&s=640"
+        # 作者卡片里 followme 和页脚作者的链接
+        
 
+    [[Params.link]]
+        img = "fa fa-github"
+        link = "https://github.com/xioyito"
+
+    # 页面配置  
+    [Params.page]
+
+
+        # 网页背景样式 1 2 3  
+        background = "1"
+
+
+        #详细定义
+        # 主页的顶部图
+        homeTopImg = "/images/home.jpg"
+        # 主页标题
+        homeTitle = "青山"
+        # 主页标题字号（单位：px）
+        homeTitleFontSize = 40
+        # 主页打字机内容
+        homeContent = "悟已往之不谏 知来者之可追"
+        # 主页打字机内容字号（单位：px）
+        homeContentFontSize = 20
+
+        # 分类页面的顶部图
+        categoryTopImg = "/images/categories.jpg"
+        # 子标题
+        categoryDes = "description of categories page"
+
+        # 标签页面的顶部图
+        tagTopImg = "/images/tag.jpg"
+        # 子标题
+        tagDes = "description of tags page"
+
+        # 归档（所有文章）页面的顶部图
+        allPostsTopImg = "/images/allPosts.jpg"
+        # 子标题
+        allPostsDes = "description of allPosts page"
+
+        # 关于页面的顶部图
+        aboutTopImg = "/images/about.jpg"
+        # 子标题
+        aboutDes = "description of about page"
+
+        # 当文章没有设置图片时，将用此图来替代
+        defaultPostImg = "/images/default.jpg"
+        
+        # 主页文章最大显示数量
+        maxHomePostCount = 5
+        # 相关文章最大显示数量
+        maxPageRelatedCount = 5
+        # 最新文章最大显示数量
+        maxPageNewestCount = 5
+
+    # Valine评论（详情请移步：https://valine.js.org/）
+    [Params.valine]
+        # 是否开启Valine评论系统
+        enable = false
+    # 页面底部配置
+    [Params.footer]
+        enable = true
+        # copyright
+        copyRight = true
+
+# Hugo 解析文档的配置
 [markup]
-    [markup.asciidocExt]
-        preserveTOC = true
+    # 语法高亮，详情请移步：https://gohugo.io/functions/highlight/
     [markup.highlight]
-        style = "github"
+        codeFences = true
+        guessSyntax = true
+        hl_Lines = ''
+        lineAnchors = ''
+        lineNoStart = 1
+        # 显示每一行代码前的序号
         lineNos = false
-    [markup.tableOfContents]
-        endLevel = 6
-        ordered = false
-        startLevel = 1
+        anchorLineNos = false
+        lineNumbersInTable = true
+        noClasses = false
+        noHl = false
+        # 代码高亮样式，更多样式请移步：https://xyproto.github.io/splash/docs/
+        style = 'api'
+        tabWidth = 4
+
+    # 如果md文件中有html语句，请启用以下代码
     [markup.goldmark]
         [markup.goldmark.renderer]
             unsafe = true
+  
