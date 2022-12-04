@@ -4,3 +4,6 @@
 [submodule "themes/star"]
 	path = themes/star
 	url = git@github.com:lovemjh/star.git
+[submodule "themes/Meet"]
+	path = themes/Meet
+	url = git@github.com:lovemjh/Meet.git
