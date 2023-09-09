@@ -81,9 +81,11 @@ enableGitInfo = true
     [Params.page]
 
 
-        # 网页背景样式 1 2 3  
-        background = "1"
+        # 网页背景图
+        background_image_url = "/imgs/bg.jpg"
 
+        #网页背景动画
+        background_svg = "true"
 
         #详细定义
         # 主页的顶部图
